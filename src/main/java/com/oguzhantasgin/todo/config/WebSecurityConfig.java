@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
         auth.inMemoryAuthentication()
                 .withUser("oguz")
-                .password("12345")
+                .password("1234")
                 .roles("ADMIN");
     }
 
