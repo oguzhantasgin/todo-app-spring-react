@@ -1,73 +1,97 @@
 import axios from "axios";
-import {GET_ERRORS, GET_TODOS, DELETE_TODO, GET_TODO} from "./types";
+import {DELETE_TODO, GET_ERRORS, GET_TODO, GET_TODOS} from "./types";
 
 
-export const addToDo = (to_do, history) => async dispatch => {
+export const addToDo = (to_do, token, history) => async dispatch => {
 
-    try {
-        await axios.post("http://localhost:8080/api/todo", to_do);
-        history.push("/");
+    let config = {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Header': '*',
+            "Authorization": token
+        }
+    };
+    axios.post("http://localhost:8080/api/todo", to_do, config).then((response) => {
+        history.push("/todo");
         dispatch({
-
                 type: GET_ERRORS,
                 payload: {}
             }
         )
-    } catch (error) {
+    }).catch((error) => {
         dispatch({
-
                 type: GET_ERRORS,
                 payload: error.response.data
             }
         )
+    })
 
-
-    }
 
 };
 
-export const getBackLog = () => async dispatch => {
+export const getBackLog = (token, history) => async dispatch => {
 
+    let config = {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Header': '*',
+            "Authorization": token
+        }
+    };
 
-    const res = await axios.get("http://localhost:8080/api/todo/all");
-    dispatch({
+    axios.get("http://localhost:8080/api/todo/all", config).then((response) => {
 
-        type: GET_TODOS,
-        payload: res.data
+        dispatch({
+            type: GET_TODOS,
+            payload: response.data
+        });
+    })
+};
+
+export const deleteToDo = (td_id, token, history) => async dispatch => {
+
+    let config = {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Header': '*',
+            "Authorization": token
+        }
+    };
+
+    axios.delete(`http://localhost:8080/api/todo/${td_id}`,config).then((response) => {
+        dispatch({
+                type: DELETE_TODO,
+                payload: td_id,
+            }
+        );
+
     });
 };
 
-export const deleteToDo = td_id => async dispatch => {
+export const getToDo = (td_id, history, token) => async dispatch => {
 
-    if (
-        window.confirm(
-            `Are you sure for delete NO#${td_id} TO-DO?`
-        )
-    ) {
-        await axios.delete(`http://localhost:8080/api/todo/${td_id}`);
-        dispatch({
-            type: DELETE_TODO,
-            payload: td_id
-        });
-    }
-};
+        let config = {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Header': '*',
+                "Authorization": token
+            }
+        };
 
-export const getToDo = (td_id, history) => async dispatch => {
-
-    try {
-
-        const res = await axios.get(`http://localhost:8080/api/todo/${td_id}`);
-        dispatch({
-
-
-            type: GET_TODO,
-            payload: res.data
+        axios.get(`http://localhost:8080/api/todo/${td_id}`, config).then((res) => {
+            history.push("/todo");
+            debugger;
+            dispatch({
+                    type: GET_TODO,
+                    payload: res.data
+                }
+            )
+        }).catch((error) => {
+            dispatch({
+                    type: GET_ERRORS,
+                    payload: " "
+                }
+            )
         })
 
-    } catch (error) {
-
-        history.push("/");
-
-    }
-
-};
+    };

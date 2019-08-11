@@ -10,7 +10,8 @@ class ToDoItem extends Component {
 
     onDeleteClick(td_id){
 
-    this.props.deleteToDo(td_id);
+    this.props.deleteToDo(td_id,this.props.user.token,this.props.history);
+
 
     };
     render() {
@@ -36,4 +37,10 @@ ToDoItem.propTypes = {
 
 };
 
-export default  connect(null, {deleteToDo}) (ToDoItem);
+const mapStateToProps = state => ({
+
+    user: state.user
+
+});
+
+export default  connect(mapStateToProps, {deleteToDo}) (ToDoItem);

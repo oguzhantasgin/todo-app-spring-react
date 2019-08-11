@@ -8,9 +8,8 @@ import {getBackLog} from "../actions/toDoActions";
 class ToDo extends Component {
 
     componentDidMount() {
+        this.props.getBackLog(this.props.user.token, this.props.history);
 
-
-        this.props.getBackLog();
     }
 
 
@@ -101,14 +100,14 @@ class ToDo extends Component {
 
             <div className="container">
                 <br/>
-                <Link to="/addToDo" className=" btn btn-success " >
-                    <i className ="far fa-calendar-check">  Create a New TO-DO</i>
+                <Link to="/addToDo" className=" btn btn-success ">
+                    <i className="far fa-calendar-check"> Create a New TO-DO</i>
                 </Link>
                 <br/>
                 <hr/>
                 {ListContent}
 
-                </div>
+            </div>
 
         );
     }
@@ -122,7 +121,8 @@ ToDo.propTypes = {
 
 const mapStateToProps = state => ({
 
-    to_dos: state.to_do
+    to_dos: state.to_do,
+    user: state.user
 
 
 });

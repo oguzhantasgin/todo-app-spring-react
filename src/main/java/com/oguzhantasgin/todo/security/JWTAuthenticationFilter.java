@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -60,6 +61,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+        res.addHeader("Access-Control-Expose-Headers", "Authorization");
+        res.addHeader("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+        res.setHeader("Access-Control-Expose-Origin", "*");
+
+
+
     }
 
 

@@ -13,7 +13,7 @@ class UpdateToDo extends Component {
 
         this.state = {
 
-            id: ",",
+            id: "",
             description: "",
             acceptanceCriteria: "",
             status: "",
@@ -27,9 +27,6 @@ class UpdateToDo extends Component {
 
     componentWillReceiveProps(nextProps) {
 
-        if (nextProps.errors) {
-            this.setState({errors: nextProps.errors});
-        }
 
         const {id, description, acceptanceCriteria, status} = nextProps.to_do;
 
@@ -44,7 +41,7 @@ class UpdateToDo extends Component {
     componentDidMount() {
 
         const {td_id} = this.props.match.params;
-        this.props.getToDo(td_id);
+        this.props.getToDo(td_id, this.props.user.token, this.props.history);
 
     }
 
@@ -53,7 +50,6 @@ class UpdateToDo extends Component {
     }
 
     onSubmit(e) {
-
         e.preventDefault();
         const updatedToDo = {
             id: this.state.id,
@@ -62,22 +58,18 @@ class UpdateToDo extends Component {
             status: this.state.status
         };
 
-        this.props.addToDo(updatedToDo, this.props.history);
+        this.props.addToDo(updatedToDo, this.props.user.token, this.props.history);
     }
 
     render() {
        const {errors} = this.state;
         return (
-
             <div className="addProjectTask">
 
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
                             <br/>
-                            <a href="/" className="btn btn-light">
-                                Back to List
-                            </a>
                             <hr/>
                             <h3 className="display-5 text-center text-black-50">Update TO-DO</h3>
                             <br/>
@@ -145,6 +137,7 @@ UpdateToDo.propTypes = {
 const mapStateProps = state => ({
 
     to_do: state.to_do.to_do,
+    user: state.user,
     errors: state.errors
 
 });

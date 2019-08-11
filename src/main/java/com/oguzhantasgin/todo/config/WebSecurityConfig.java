@@ -25,6 +25,7 @@ import org.springframework.context.annotation.Bean;
 
 import static com.oguzhantasgin.todo.security.SecurityConstants.SIGN_IN_URL;
 import static com.oguzhantasgin.todo.security.SecurityConstants.SIGN_UP_URL;
+import static com.oguzhantasgin.todo.security.SecurityConstants.TODO;
 
 @Configuration
 @EnableWebSecurity
@@ -47,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.POST, SIGN_IN_URL).permitAll()
+                .antMatchers("/api/todo/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
@@ -79,6 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         return super.userDetailsService();
     }
+
 
 
 }

@@ -41,25 +41,18 @@ class AddToDo extends Component {
     }
 
     onSubmit(e) {
-
-
         e.preventDefault();
 
         const newToDo = {
-
             description: this.state.description,
             acceptanceCriteria: this.state.acceptanceCriteria,
-            status: this.state.status
-
+            status: this.state.status,
         };
 
-
-        this.props.addToDo(newToDo, this.props.history)
-
+        this.props.addToDo(newToDo, this.props.user.token, this.props.history)
     }
 
     render() {
-
         const {errors} = this.state;
         return (
             <div className="addToDo">
@@ -67,10 +60,6 @@ class AddToDo extends Component {
                     <div className="row">
                         <div className="col-md-8 m-auto">
                             <br/>
-                            <a href = "/" className="btn btn-light">
-                                Back to List
-                            </a>
-                            <hr/>
                             <h3 className="display-5 text-center text-black-50">Add new TO-DO</h3>
                             <br/>
                             <form onSubmit={this.onSubmit}>
@@ -140,9 +129,8 @@ AddToDo.propTypes = {
 };
 
 const mapStateToProps = state => ({
-
-
-    errors: state.errors
+    errors: state.errors,
+    user: state.user,
 
 });
 
