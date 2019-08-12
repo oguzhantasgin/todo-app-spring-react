@@ -26,10 +26,7 @@ export const registerUser = (applicationUser, history) => async dispatch => {
 
 export const loginUser = (user, history) => async dispatch => {
 
-    let config = {
-        headers: {'Access-Control-Allow-Origin': '*'}
-    };
-    axios.post("http://localhost:8080/login", user, config)
+    axios.post("http://localhost:8080/login", user)
         .then((response) => {
             history.push("");
             dispatch({
@@ -51,7 +48,9 @@ export const loginUser = (user, history) => async dispatch => {
 };
 
 export const logoutUser = () => async dispatch => {
+    history.push("");
     dispatch({
+
         type: LOGOUT_USER,
         token: '',
         isAuthenticated: false

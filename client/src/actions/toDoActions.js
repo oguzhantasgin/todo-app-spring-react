@@ -68,7 +68,7 @@ export const deleteToDo = (td_id, token, history) => async dispatch => {
     });
 };
 
-export const getToDo = (td_id, history, token) => async dispatch => {
+export const getToDo = (td_id, token, history) => async dispatch => {
 
         let config = {
             headers: {
@@ -79,8 +79,6 @@ export const getToDo = (td_id, history, token) => async dispatch => {
         };
 
         axios.get(`http://localhost:8080/api/todo/${td_id}`, config).then((res) => {
-            history.push("/todo");
-            debugger;
             dispatch({
                     type: GET_TODO,
                     payload: res.data
