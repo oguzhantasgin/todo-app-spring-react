@@ -9,34 +9,23 @@ class ToDo extends Component {
 
     componentDidMount() {
         this.props.getBackLog(this.props.user.token, this.props.history);
-
     }
-
-
     render() {
-
         const {to_dos} = this.props.to_dos;
-
         let ListContent;
         let toDoItems = [];
         let inProgressItems = [];
         let doneItems = [];
 
         const ListAlgorithm = to_do => {
-
             if (to_do.length < 1) {
                 return (<div className="alert alert-warning text-center" role="alert">
                     Empty list</div>)
 
             } else {
-
                 const toDos = to_dos.map(to_do => (
-
-
                     <ToDoItem key={to_do.id} to_do={to_do}/>
-
-                ));
-
+                    ));
                 for (let i = 0; i < toDos.length; i++) {
 
                     if (toDos[i].props.to_do.status === "TO_DO") {
@@ -51,9 +40,7 @@ class ToDo extends Component {
                 }
 
                 return (
-
                     <React.Fragment>
-
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-4">
@@ -64,7 +51,6 @@ class ToDo extends Component {
                                     </div>
                                     {toDoItems}
                                 </div>
-
                                 <div className="col-md-4">
                                     <div className="card text-center mb-2">
                                         <div className="card-header bg-warning text-white">
@@ -73,7 +59,6 @@ class ToDo extends Component {
                                     </div>
                                     {inProgressItems}
                                 </div>
-
                                 <div className="col-md-4">
                                     <div className="card text-center mb-2">
                                         <div className="card-header bg-success text-white">
@@ -82,22 +67,14 @@ class ToDo extends Component {
                                     </div>
                                     {doneItems}
                                 </div>
-
                             </div>
                         </div>
-
-
                     </React.Fragment>
-
-                )
-            }
-
-        };
+                )}};
 
         ListContent = ListAlgorithm(to_dos);
 
         return (
-
             <div className="container">
                 <br/>
                 <Link to="/addToDo" className=" btn btn-success ">
@@ -106,25 +83,19 @@ class ToDo extends Component {
                 <br/>
                 <hr/>
                 {ListContent}
-
             </div>
-
         );
     }
 }
 
 ToDo.propTypes = {
-
     getBackLog: PropTypes.func.isRequired,
     to_dos: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-
     to_dos: state.to_do,
     user: state.user
-
-
 });
 
 export default connect(mapStateToProps, {getBackLog})(ToDo);

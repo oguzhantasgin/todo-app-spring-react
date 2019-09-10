@@ -76,10 +76,7 @@ class RegisterUser extends Component {
                                     <input
                                         type="text"
                                         className={classnames("form-control form-control-sg", {
-
                                             "is-invalid": errors.username
-
-
                                         })}
                                         name="username"
                                         placeholder="Username"
@@ -88,11 +85,8 @@ class RegisterUser extends Component {
                                     />
                                     {
                                         errors.username && (
-
                                             <div className="invalid-feedback">
-
                                                 {errors.username}
-
                                             </div>
                                         )
                                     }
@@ -102,10 +96,7 @@ class RegisterUser extends Component {
                                      <input
                                          type = "password"
                                          className={classnames("form-control form-control-sg", {
-
                                              "is-invalid": errors.password
-
-
                                          })}
                                          placeholder="Password"
                                          name="password"
@@ -114,12 +105,9 @@ class RegisterUser extends Component {
                                      />
 
                                     {
-                                        errors.username && (
-
+                                        errors.password && (
                                             <div className="invalid-feedback">
-
                                                 {errors.password}
-
                                             </div>
                                         )
                                     }

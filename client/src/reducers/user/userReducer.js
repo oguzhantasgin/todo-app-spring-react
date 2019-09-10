@@ -1,4 +1,4 @@
-import {REGISTER_USER, LOGOUT_USER, LOGIN_USER} from "../../actions/types";
+import {REGISTER_USER, LOGOUT_USER, LOGIN_USER,GET_CURRENT_USER} from "../../actions/types";
 
 const initialState = {
     applicationUser: {},
@@ -25,6 +25,12 @@ export default function(state = initialState, action) {
                 ...state,
                 token: action.token,
                 isAuthenticated: action.isAuthenticated
+            };
+        case GET_CURRENT_USER:
+            return {
+                ...state,
+                token: action.token,
+                applicationUser: action.isAuthenticated
             };
         default:
             return state;

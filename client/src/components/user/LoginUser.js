@@ -97,7 +97,7 @@ class LoginUser extends Component {
                                     />
 
                                     {
-                                        errors.username && (
+                                        errors.password && (
                                             <div className="invalid-feedback">
                                                 {errors.password}
                                             </div>

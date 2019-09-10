@@ -3,11 +3,8 @@ package com.oguzhantasgin.todo.config;
 
 import com.oguzhantasgin.todo.security.JWTAuthenticationFilter;
 import com.oguzhantasgin.todo.security.JWTAuthorizationFilter;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -33,7 +30,6 @@ import static com.oguzhantasgin.todo.security.SecurityConstants.TODO;
 @EnableWebSecurity
 @ComponentScan("com.oguzhantasgin.todo.service")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
 
     private UserDetailsService userDetailsService;
 

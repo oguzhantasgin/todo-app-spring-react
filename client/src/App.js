@@ -4,7 +4,7 @@ import './App.css';
 import NavBar from "./components/NavBar";
 import ToDo from "./components/ToDo";
 import GuestHomePage from "./components/GuestHomePage";
-import { Router, Route, Link } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import AddToDo from "./components/todo/AddToDo";
 import {Provider} from "react-redux";
 import store from "./store";
